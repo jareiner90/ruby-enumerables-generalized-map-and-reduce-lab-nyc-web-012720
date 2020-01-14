@@ -9,12 +9,21 @@ def map(array)
   new_array
 end
 
-def reduce(array)
-  total = 0
-  count = 0
-  while count < array.length
-    total += (yield(array[count]))
-    count += 1
+
+
+def reduce(array, sv=nil)
+
+  if sv
+    sum = sv
+    i = 0
+  else
+    sum = array[0]
+    i = 1
   end
-  total
-end
+
+  while i < array.length
+    sum = yield(sum, array[i])
+    i += 1
+  end
+  sum
+end 
